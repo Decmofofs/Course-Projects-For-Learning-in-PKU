@@ -6,4 +6,4 @@
     This repository uses GPL3.0. 
     If you find some of the codes useful,please feel free to:
     clone, fork, or use them in any forms.
-    But please obey the GPL3.0. 
+    But please obey the GPL3.0 License. 
