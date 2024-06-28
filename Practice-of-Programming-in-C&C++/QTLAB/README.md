@@ -1,4 +1,4 @@
-[TOC]
+
 # Practice-of-C&C++-Programming-QTLAB Project
 
 ## Introduction
