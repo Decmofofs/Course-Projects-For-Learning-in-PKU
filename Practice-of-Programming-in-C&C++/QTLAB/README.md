@@ -10,7 +10,7 @@
 
 ## Build
 
-### Enviroment Requirement
+### Environment Requirement
     本项目基于 Qt Enterprise 6.7.1 或 6.7.2 实现.目前只适配了Windows11系统.使用时，您可以:
         1.在本机下载完整的Qt Enterprise / Qt Education 软件并构建;
         2.使用提供的Release中给出的环境.
@@ -23,7 +23,8 @@
         4.找到环境变量编辑设置，在系统变量栏找到Path，打开后新建:C:\Qt\6.7.2\mingw_64\bin，单击确定并退出.(这里6.7.2因您安装时的版本号而异)
 ### Build Process
     若您采用第一种方法，请按如下方法构建:
-        完整下载本项目的文件夹QTLAB.双击QTLAB.pro，Qt Creator将自动打开.点击左下角的绿色箭头即可自动构建程序并启动.
+        完整下载本项目的文件夹QTLAB.双击QTLAB.pro，Qt Creator将自动打开.点
+        击左下角的绿色箭头即可自动构建程序并启动.
     
     若您采用第二种方法:
         请您解压zip文件，找到mingw64/bin/QTLAB.exe，双击启动.
