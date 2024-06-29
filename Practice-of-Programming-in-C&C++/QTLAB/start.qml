@@ -66,9 +66,9 @@ Item {
                     objectName: "defaultobject"
                     //source: appDir + "/menumesh.mesh"
                     //source: "file:menumesh.mesh"
-                    source: "file:///D:/defaultobject_mesh.mesh"
+                    source: Qt.application.arguments[0].substr(0,Qt.application.arguments[0].length-10)+"/mainmenu/default_menu.mesh"
                     //source: "C:/Users/Lucha/Desktop/QtRelease/mingw_64/bin/meshes/defaultobject_mesh.mesh"
-                    //source: appDir + "/meshes/defaultobject_mesh.mesh"
+                    //source:  + "/meshes/defaultobject_mesh.mesh"
                     materials: [
                         defaultMaterial_material
                     ]

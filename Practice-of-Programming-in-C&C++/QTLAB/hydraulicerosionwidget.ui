@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HydraulicErosionWidget</class>
+ <widget class="QWidget" name="HydraulicErosionWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1600</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="reset">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>640</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>重置数据</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Get3DView">
+   <property name="geometry">
+    <rect>
+     <x>1360</x>
+     <y>640</y>
+     <width>191</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>3D地形模式</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Printer">
+   <property name="geometry">
+    <rect>
+     <x>1360</x>
+     <y>20</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>绘制地形图</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="start">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>20</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>生成地形</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>160</y>
+     <width>461</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>高度：256
+宽度：256</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetSeed">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>300</y>
+     <width>461</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>种子：0</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetT">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>470</y>
+     <width>461</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>模拟次数：1000</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

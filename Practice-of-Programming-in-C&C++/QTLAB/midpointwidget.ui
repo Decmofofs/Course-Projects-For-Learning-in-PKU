@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MidPointWidget</class>
+ <widget class="QWidget" name="MidPointWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1600</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>21</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="reset">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>640</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>重置数据</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Printer">
+   <property name="geometry">
+    <rect>
+     <x>1360</x>
+     <y>20</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>绘制地形图</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="start">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>20</y>
+     <width>201</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>生成地形</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Get3DView">
+   <property name="geometry">
+    <rect>
+     <x>1360</x>
+     <y>640</y>
+     <width>191</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>3D地形模式</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetLU">
+   <property name="geometry">
+    <rect>
+     <x>1190</x>
+     <y>150</y>
+     <width>151</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>左上：127</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetLD">
+   <property name="geometry">
+    <rect>
+     <x>1190</x>
+     <y>250</y>
+     <width>151</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>左下：127</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetRU">
+   <property name="geometry">
+    <rect>
+     <x>1340</x>
+     <y>150</y>
+     <width>151</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>右上：127</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetRD">
+   <property name="geometry">
+    <rect>
+     <x>1340</x>
+     <y>250</y>
+     <width>151</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>右下：127</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="initHeights">
+   <property name="geometry">
+    <rect>
+     <x>1140</x>
+     <y>140</y>
+     <width>41</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>设
+置
+初
+始
+高
+度</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetSeed">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>380</y>
+     <width>461</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>种子：0</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetHeight">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>460</y>
+     <width>231</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>高度：300</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetWidth">
+   <property name="geometry">
+    <rect>
+     <x>1330</x>
+     <y>460</y>
+     <width>231</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>21</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>宽度：400</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SetRange">
+   <property name="geometry">
+    <rect>
+     <x>1100</x>
+     <y>540</y>
+     <width>461</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>扰动范围：±40</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

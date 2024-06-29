@@ -25,9 +25,13 @@ public:
 private slots:
     void on_ValueNoiseStarter_clicked();
 
-    void on_pushButton_clicked();
+    void on_Help_clicked();
 
     void on_PerlinNoiseStarter_clicked();
+
+    void on_MidPointStarter_clicked();
+
+    void on_ErosionStarter_clicked();
 
 public slots:
     //void onValueNoiseButtonClicked();

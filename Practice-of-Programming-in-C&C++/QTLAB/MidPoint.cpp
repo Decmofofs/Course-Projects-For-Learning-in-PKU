@@ -3,12 +3,18 @@
 #include "objwriter.h"
 #include "STrandom.h"
 #include "setcolor.h"
-#include "color.x"
+#include "color_extension.h"
 #include <QDebug>
 #include "HeightGraphOperator.cpp"
 #include <algorithm>
+
 double randomDisplacement(double range, int seed) {
-    std::mt19937 generator(seed);
+    static int seedRec = seed;
+    static std::mt19937 generator(seed);
+    if (seedRec != seed) {
+        seedRec = seed;
+        generator.seed(seed);
+    }
     std::uniform_real_distribution<double> distribution(-range, range);
     return distribution(generator);
 }
@@ -22,10 +28,10 @@ void RecursiveGraphProcess(heightGraph & grid,unsigned x1,unsigned y1,unsigned x
         return;
     //Calculate midpoint values
     grid[midX][midY] = (grid[x1][y1] + grid[x2][y2] + grid[x1][y2] + grid[x2][y1]) / 4.0 + randomDisplacement(range, int_seed);
-    grid[x1][midY] = std::max((grid[x1][y1] + grid[x1][y2]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit);
-    grid[x2][midY] = std::max((grid[x2][y1] + grid[x2][y2]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit);
-    grid[midX][y1] = std::max((grid[x1][y1] + grid[x2][y1]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit);
-    grid[midX][y2] = std::max((grid[x1][y2] + grid[x2][y2]) / 2.0 + randomDisplacement(range, int_seed),(double)(height_limit));
+    grid[x1][midY] = std::max(double(0), std::min((grid[x1][y1] + grid[x1][y2]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit));
+    grid[x2][midY] = std::max(double(0), std::min((grid[x2][y1] + grid[x2][y2]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit));
+    grid[midX][y1] = std::max(double(0), std::min((grid[x1][y1] + grid[x2][y1]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit));
+    grid[midX][y2] = std::max(double(0), std::min((grid[x1][y2] + grid[x2][y2]) / 2.0 + randomDisplacement(range, int_seed),(double)height_limit));
 
     // Recurse on 4 sub-squares
     RecursiveGraphProcess(grid, x1, y1, midX, midY, range / 1.2, int_seed,height_limit);
@@ -46,7 +52,7 @@ bool MidPoint2D(unsigned lup,unsigned ldown,unsigned rup,unsigned rdown,unsigned
     
     grid.addNoise(seed%(114514191));
 
-    objWriter::CubeMesh(grid,Vector2(0,0),"MidPointMesh");
+    objWriter::CubeMesh(grid,Vector2(0,0),"midpointmesh");
     bmp_reader::write("./MidPointGraph.bmp",&grid,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
     
     return true;
@@ -55,7 +61,7 @@ bool MidPoint2D(unsigned lup,unsigned ldown,unsigned rup,unsigned rdown,unsigned
 
 
 
-MidPointCal::MidPointCal(const unsigned & _lup,const unsigned & _ldown,const unsigned & _rup,const unsigned & _rdown,const unsigned & _height, const unsigned & _width, const unsigned & _seed, const double & _range,QObject * parent):
+MidPointCal::MidPointCal(const unsigned & _lup,const unsigned & _ldown,const unsigned & _rup,const unsigned & _rdown,const unsigned & _height, const unsigned & _width, const unsigned & _seed, const double & _range, const unsigned& height_limit, QObject * parent):
     QObject(parent),
     height(_height),width(_width),seed(_seed),range(_range),lup(_lup),ldown(_ldown),rup(_rup),rdown(_rdown){
     

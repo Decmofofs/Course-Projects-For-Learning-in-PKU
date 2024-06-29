@@ -3,7 +3,8 @@
 #include <QApplication>
 #include <QProcess>
 #include "picturewidget.h"
-
+#include "cstdio"
+#include "QDebug"
 objWriter::objWriter() {}
 
 unsigned objWriter::SMOOTH = 0;
@@ -11,24 +12,27 @@ unsigned objWriter::CUBE = 1;
 
 void objWriter::getMesh(const std::string& file) {
     QString s = PictureWidget::filerootApplication->applicationDirPath();
-    if (s != "") s += '/';
+    //if (s != "") s += '/';
     QString root = "";
+    std::string root_2 = "";
     int len = s.length();
-    for(int i = 0; i < len; ++i){
+    for(int i = 0; i < len-6; ++i){
         root += s[i];
+
     }
-
-
+    qDebug() << root;
+    std::string file_path=(std::string)(root.toLatin1().data())+"/debug/meshes/"+file+"_mesh.mesh";
+    qDebug() << file_path;
+    std::remove(file_path.c_str());
     QProcess* p = new QProcess();
-    QString command = root + "balsam.exe";
+    QString command = "balsam.exe";
     QStringList arguments;
-    arguments << root + QString(file.c_str()) + ".obj";
+    arguments << root + "/"+QString(file.c_str()) + ".obj"<<"-o"<<root+"/debug";
 
     p->start(command, arguments);
     p->waitForStarted();
     p->waitForFinished();
     QObject::connect(p, &QProcess::finished, p, &QObject::deleteLater);
-
 }
 
 void objWriter::SmoothMesh(heightGraph& graph, const Vector2& start_position, const std::string& file) {
@@ -87,6 +91,8 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
     int startx = (int)start_position.x;
     int starty = (int)start_position.y;
 
+    qDebug() << "init x y succ";
+
     unsigned flatten = 2;
 
     // vertices
@@ -100,6 +106,8 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
     }
     fout << std::endl;
 
+    qDebug() << "write v success";
+
     // top faces
     for (int i = 0; i < height - 1; ++i) {
         for (int j = 0; j < width - 1; ++j) {
@@ -112,6 +120,8 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
         }
     }
     fout << std::endl;
+
+    qDebug() << "write top success";
 
     // side faces
     for (int i = 0; i < height - 1; ++i) {
@@ -128,6 +138,8 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
             }
         }
     }
+
+    qDebug() << "write side success";
 
 
     fout.close();

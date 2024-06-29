@@ -18,7 +18,7 @@ public:
     const unsigned & ldown;
     const unsigned & rup;
     const unsigned & rdown;
-    MidPointCal(const unsigned & _lup,const unsigned & _ldown,const unsigned & _rup,const unsigned & _rdown,const unsigned & _height, const unsigned & _width, const unsigned & _seed, const double & _range,QObject * parent = nullptr);
+    MidPointCal(const unsigned & _lup,const unsigned & _ldown,const unsigned & _rup,const unsigned & _rdown,const unsigned & _height, const unsigned & _width, const unsigned & _seed, const double & _range, const unsigned& height_limit, QObject * parent = nullptr);
 
 signals:
     void ToDo();

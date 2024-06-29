@@ -22,12 +22,12 @@ bool PerLinNoise2D(unsigned height, unsigned width, unsigned precision, unsigned
     qDebug() << "start succ";
     STrandom::release();
     STrandom::resetSeed(seed);
-    heightGraph grid(Vector2(height * precision + 1, width * precision + 1));
+    heightGraph gridx(Vector2(height * precision + 1, width * precision + 1));
     // Implement PerLin Noise 2D calculation here
     
     for (unsigned i = 0; i <= height; ++i) {
         for (unsigned j = 0; j <= width; ++j) {
-            grid[i * precision][j * precision] = (double)(STrandom::getSTrand(i, j) % height_limit);
+            gridx[i * precision][j * precision] = (double)(STrandom::getSTrand(i, j) % height_limit) / height_limit;
         }
     }
 
@@ -37,10 +37,10 @@ bool PerLinNoise2D(unsigned height, unsigned width, unsigned precision, unsigned
     for (unsigned i = 0; i < height; ++i) {
         for (unsigned j = 0; j <= width; ++j) {
             for (unsigned p = 1; p < precision; ++p) {
-                double a = grid[i * precision][j * precision];
-                double b = grid[(i + 1) * precision][j * precision];
+                double a = gridx[i * precision][j * precision];
+                double b = gridx[(i + 1) * precision][j * precision];
                 double x = (double)p / precision;
-                grid[i * precision + p][j * precision] = CosineInterpolate(a, b, x);
+                gridx[i * precision + p][j * precision] = CosineInterpolate(a, b, x);
             }
         }
     }
@@ -49,10 +49,10 @@ bool PerLinNoise2D(unsigned height, unsigned width, unsigned precision, unsigned
     for (unsigned i = 0; i <= height; ++i) {
         for (unsigned j = 0; j < width; ++j) {
             for (unsigned p = 1; p < precision; ++p) {
-                double a = grid[i * precision][j * precision];
-                double b = grid[i * precision][(j + 1) * precision];
+                double a = gridx[i * precision][j * precision];
+                double b = gridx[i * precision][(j + 1) * precision];
                 double x = (double)p / precision;
-                grid[i * precision][j * precision + p] = CosineInterpolate(a, b, x);
+                gridx[i * precision][j * precision + p] = CosineInterpolate(a, b, x);
             }
         }
     }
@@ -65,19 +65,100 @@ bool PerLinNoise2D(unsigned height, unsigned width, unsigned precision, unsigned
             for (unsigned p = 1; p < precision; ++p) {
                 for (unsigned q = 1; q < precision; ++q) {
                     // if (i == height || j == width) continue;
-                    double a = grid[i * precision][j * precision + q];
-                    double b = grid[i * precision + p][j * precision];
+                    double a = gridx[i * precision][j * precision + q];
+                    double b = gridx[i * precision + p][j * precision];
                     double x = (double)q / precision;
-                    grid[i * precision + p][j * precision + q] = CosineInterpolate(a, b, x);
+                    gridx[i * precision + p][j * precision + q] = CosineInterpolate(a, b, x);
                 }
             }
         }
     }
+
+    heightGraph gridy(Vector2(height * precision + 1, width * precision + 1));
+    // Implement PerLin Noise 2D calculation here
+
+    for (unsigned i = 0; i <= height; ++i) {
+        for (unsigned j = 0; j <= width; ++j) {
+            gridy[i * precision][j * precision] = (double)(STrandom::getSTrand(i + 199283, j + 173664) % height_limit) / height_limit;
+        }
+    }
+
+    qDebug() << "apply succ";
+
+    // 纵线上的噪声插值
+    for (unsigned i = 0; i < height; ++i) {
+        for (unsigned j = 0; j <= width; ++j) {
+            for (unsigned p = 1; p < precision; ++p) {
+                double a = gridy[i * precision][j * precision];
+                double b = gridy[(i + 1) * precision][j * precision];
+                double x = (double)p / precision;
+                gridy[i * precision + p][j * precision] = CosineInterpolate(a, b, x);
+            }
+        }
+    }
+
+    // 横线上的噪声插值
+    for (unsigned i = 0; i <= height; ++i) {
+        for (unsigned j = 0; j < width; ++j) {
+            for (unsigned p = 1; p < precision; ++p) {
+                double a = gridy[i * precision][j * precision];
+                double b = gridy[i * precision][(j + 1) * precision];
+                double x = (double)p / precision;
+                gridy[i * precision][j * precision + p] = CosineInterpolate(a, b, x);
+            }
+        }
+    }
+
+    qDebug() << "column succ";
+
+    // 网格内的噪声插值
+    for (unsigned i = 0; i < height; ++i) {
+        for (unsigned j = 0; j < width; ++j) {
+            for (unsigned p = 1; p < precision; ++p) {
+                for (unsigned q = 1; q < precision; ++q) {
+                    // if (i == height || j == width) continue;
+                    double a = gridy[i * precision][j * precision + q];
+                    double b = gridy[i * precision + p][j * precision];
+                    double x = (double)q / precision;
+                    gridy[i * precision + p][j * precision + q] = CosineInterpolate(a, b, x);
+                }
+            }
+        }
+    }
+
+    heightGraph ng(Vector2(height * precision + 1, width * precision + 1));
+    ng[0][0] = 127;
+    for (unsigned i = 1; i <= height * precision; ++i) {
+        for (unsigned j = 0; j <= width * precision; ++j) {
+            ng[i][j] = ng[i-1][j] + gridx[i][j] - 0.5;
+        }
+    }
+    for (unsigned j = 1; j <= width * precision; ++j) {
+        for ( unsigned i = 0; i <= height * precision; ++i) {
+            ng[i][j] = ng[i][j-1] + gridy[i][j] - 0.5;
+        }
+    }
+
+    /*
+    double minNG = 0, maxNG = 0;
+    for (unsigned i = 0; i <= height * precision ; ++i) {
+        for (unsigned j = 0; j <= height * precision; ++j) {
+            if (minNG > ng[i][j]) minNG = ng[i][j];
+            if (maxNG < ng[i][j]) maxNG = ng[i][j];
+        }
+    }
+    for (unsigned i = 0; i <= height * precision ; ++i) {
+        for (unsigned j = 0; j <= height * precision; ++j) {
+            ng[i][j] = int((height_limit + 1) * (ng[i][j] - minNG + 1e-3) / (maxNG - minNG + 1e-3));
+            // qDebug() << ng[i][j];
+        }
+    }*/
+
     
     qDebug() << "cal succ";
-    objWriter::CubeMesh(grid,Vector2(0,0),"perlinnoisemesh");
+    objWriter::CubeMesh(ng,Vector2(0,0),"perlinnoisemesh");
     qDebug() << "mesh succ";
-    bmp_reader::write("./PerlinNoiseGraph.bmp",&grid,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    bmp_reader::write("./PerlinNoiseGraph.bmp",&ng,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
     qDebug() << "bmp succ";
     return true;
 }

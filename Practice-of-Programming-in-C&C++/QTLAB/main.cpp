@@ -5,10 +5,13 @@
 #include <QMouseEvent>
 #include <QLabel>
 #include <QThread>
-
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
+
+
+
     QApplication a(argc, argv);
     PictureWidget::filerootApplication = &a;
 

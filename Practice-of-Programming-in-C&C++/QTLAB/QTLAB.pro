@@ -24,9 +24,11 @@ SOURCES += \
     color_extension.cpp \
     heightgraph.cpp \
     height_reader.cpp \
+    hydraulicerosionwidget.cpp \
     math_expand.cpp \
     main.cpp \
     mainwindow.cpp \
+    midpointwidget.cpp \
     objwriter.cpp \
     perlinnoisewidget.cpp \
     picturewidget.cpp \
@@ -34,15 +36,19 @@ SOURCES += \
     valuenoise.cpp \
     valuenoisewidget.cpp \
     view3dwidget.cpp \
-    PerlinNoise.cpp
+    PerlinNoise.cpp \
+    MidPoint.cpp \
+    HydraulicErosion.cpp
 
 HEADERS += \
     STrandom.h \
     color_extension.h \
+    hydraulicerosionwidget.h \
     mainwindow.h \
     heightgraph.h \
     height_reader.h \
     math_expand.h \
+    midpointwidget.h \
     objwriter.h \
     perlinnoisewidget.h \
     picturewidget.h \
@@ -50,10 +56,14 @@ HEADERS += \
     valuenoise.h \
     valuenoisewidget.h \
     view3dwidget.h \
-    PerLinNoise.h
+    PerLinNoise.h \
+    MidPoint.h \
+    HydraulicErosion.h
 
 FORMS += \
+    hydraulicerosionwidget.ui \
     mainwindow.ui \
+    midpointwidget.ui \
     perlinnoisewidget.ui \
     picturewidget.ui \
     setcolor.ui \
