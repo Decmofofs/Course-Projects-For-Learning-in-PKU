@@ -5,6 +5,7 @@
 #include "setcolor.h"
 #include "color_extension.h"
 #include "objwriter.h"
+#include "picturewidget.h"
 #include <QDebug>
 
 // Interpolate Functions
@@ -154,12 +155,13 @@ bool PerLinNoise2D(unsigned height, unsigned width, unsigned precision, unsigned
         }
     }*/
 
-    
-    qDebug() << "cal succ";
-    objWriter::CubeMesh(ng,Vector2(0,0),"perlinnoisemesh");
-    qDebug() << "mesh succ";
-    bmp_reader::write("./PerlinNoiseGraph.bmp",&ng,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
-    qDebug() << "bmp succ";
+    if (PictureWidget::MeshStyle == 0) objWriter::CubeMesh(ng, Vector2(0,0), "perlinnoisemesh");
+    else objWriter::SmoothMesh(ng, Vector2(0,0), "perlinnoisemesh");
+    if (PictureWidget::PrinterStyle == 0) bmp_reader::write("./PerlinNoiseGraph.bmp", &ng, color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    else bmp_reader::write("./PerlinNoiseGraph.bmp", &ng, cSimpleCopy());
+
+    // objWriter::CubeMesh(ng,Vector2(0,0),"perlinnoisemesh");
+    // bmp_reader::write("./PerlinNoiseGraph.bmp",&ng,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
     return true;
 }
 

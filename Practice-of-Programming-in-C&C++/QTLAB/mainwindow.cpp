@@ -4,6 +4,7 @@
 #include "perlinnoisewidget.h"
 #include "midpointwidget.h"
 #include "hydraulicerosionwidget.h"
+#include "settingswidget.h"
 #include <QVBoxLayout>
 #include <QQmlContext>
 
@@ -14,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("Qt大作业");
     widget = NULL;
+    stwidget = NULL;
     resize(2400,960);
     ui->label->setGeometry(QRect(700,20,ui->label->width(),ui->label->height()));
     ui->ValueNoiseStarter->setGeometry(QRect(760,100,ui->ValueNoiseStarter->width(),ui->ValueNoiseStarter->height()));
@@ -35,6 +37,7 @@ MainWindow::~MainWindow()
     if (widget != NULL) delete widget;
     if (player != NULL) delete player;
     if (videoWidget != NULL) delete videoWidget;
+    if (stwidget!= NULL) delete stwidget;
 }
 
 void MainWindow::on_Help_clicked()
@@ -95,3 +98,11 @@ void MainWindow::on_ErosionStarter_clicked()
     return;
 }
 
+
+void MainWindow::on_Settings_clicked()
+{
+    stwidget = new SettingsWidget();
+    stwidget->setWindowTitle(QString("设置"));
+    stwidget->show();
+    return;
+}

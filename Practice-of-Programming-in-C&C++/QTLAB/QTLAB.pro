@@ -33,6 +33,7 @@ SOURCES += \
     perlinnoisewidget.cpp \
     picturewidget.cpp \
     setcolor.cpp \
+    settingswidget.cpp \
     valuenoise.cpp \
     valuenoisewidget.cpp \
     view3dwidget.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     perlinnoisewidget.h \
     picturewidget.h \
     setcolor.h \
+    settingswidget.h \
     valuenoise.h \
     valuenoisewidget.h \
     view3dwidget.h \
@@ -67,6 +69,7 @@ FORMS += \
     perlinnoisewidget.ui \
     picturewidget.ui \
     setcolor.ui \
+    settingswidget.ui \
     valuenoisewidget.ui
 
 

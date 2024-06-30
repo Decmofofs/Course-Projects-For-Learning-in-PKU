@@ -14,6 +14,8 @@ PictureWidget::PictureWidget(QWidget *parent) :
 QApplication* PictureWidget::filerootApplication = NULL;
 QQmlApplicationEngine* PictureWidget::engine = NULL;
 SetColor* PictureWidget::setcolorWidget = NULL;
+int PictureWidget::MeshStyle = 0;
+int PictureWidget::PrinterStyle = 0;
 
 PictureWidget::~PictureWidget()
 {

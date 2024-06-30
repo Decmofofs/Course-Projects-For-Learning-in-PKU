@@ -6,6 +6,7 @@
 #include "color_extension.h"
 #include <QDebug>
 #include "HeightGraphOperator.cpp"
+#include "picturewidget.h"
 #include <algorithm>
 
 double randomDisplacement(double range, int seed) {
@@ -52,8 +53,12 @@ bool MidPoint2D(unsigned lup,unsigned ldown,unsigned rup,unsigned rdown,unsigned
     
     grid.addNoise(seed%(114514191));
 
-    objWriter::CubeMesh(grid,Vector2(0,0),"midpointmesh");
-    bmp_reader::write("./MidPointGraph.bmp",&grid,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    if (PictureWidget::MeshStyle == 0) objWriter::CubeMesh(grid, Vector2(0,0), "midpointmesh");
+    else objWriter::SmoothMesh(grid, Vector2(0,0), "midpointmesh");
+    if (PictureWidget::PrinterStyle == 0) bmp_reader::write("./MidPointGraph.bmp", &grid, color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    else bmp_reader::write("./MidPointGraph.bmp", &grid, cSimpleCopy());
+    //objWriter::CubeMesh(grid,Vector2(0,0),"midpointmesh");
+    //bmp_reader::write("./MidPointGraph.bmp",&grid,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
     
     return true;
 }

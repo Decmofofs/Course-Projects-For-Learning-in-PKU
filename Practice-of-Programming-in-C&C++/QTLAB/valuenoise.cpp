@@ -4,6 +4,7 @@
 #include "STrandom.h"
 #include "setcolor.h"
 #include "color_extension.h"
+#include "picturewidget.h"
 #include <QDebug>
 
 /*
@@ -62,9 +63,11 @@ bool ValueNoise2D(unsigned height, unsigned width, unsigned precision, unsigned 
 
     grid.addNoise(2300012991);
 
-    objWriter::CubeMesh(grid, Vector2(0,0), "valuenoisemesh");
+    if (PictureWidget::MeshStyle == 0) objWriter::CubeMesh(grid, Vector2(0,0), "valuenoisemesh");
+    else objWriter::SmoothMesh(grid, Vector2(0,0), "valuenoisemesh");
     // grid.write("D:/ValueNoise.hgt");
-    bmp_reader::write("./ValueNoiseGraph.bmp", &grid, color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    if (PictureWidget::PrinterStyle == 0) bmp_reader::write("./ValueNoiseGraph.bmp", &grid, color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    else bmp_reader::write("./ValueNoiseGraph.bmp", &grid, cSimpleCopy());
     // bmp_reader::write("./ValueNoiseGraph.bmp", &grid, cSimpleCopy());
 
     return true;

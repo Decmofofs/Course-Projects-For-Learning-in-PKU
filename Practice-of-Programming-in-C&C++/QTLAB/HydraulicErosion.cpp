@@ -6,6 +6,7 @@
 #include "color_extension.h"
 #include <QDebug>
 #include "HeightGraphOperator.cpp"
+#include "picturewidget.h"
 #include <algorithm>
 #include <time.h>
 #include <queue>
@@ -112,8 +113,13 @@ bool HydraulicErosion2D(int seed, int T){
     while(times--){
         update();
     }
-    objWriter::CubeMesh(grid,Vector2(0,0),"hydraulicerosionmesh");
-    bmp_reader::write("./HydraulicErosionGraph.bmp",&grid,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+
+    if (PictureWidget::MeshStyle == 0) objWriter::CubeMesh(grid, Vector2(0,0), "hydraulicerosionmesh");
+    else objWriter::SmoothMesh(grid, Vector2(0,0), "hydraulicerosionmesh");
+    if (PictureWidget::PrinterStyle == 0) bmp_reader::write("./HydraulicErosion.bmp", &grid, color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
+    else bmp_reader::write("./HydraulicErosion.bmp", &grid, cSimpleCopy());
+    //objWriter::CubeMesh(grid,Vector2(0,0),"hydraulicerosionmesh");
+    //bmp_reader::write("./HydraulicErosionGraph.bmp",&grid,color_extension::cHypsographicMap(6, SetColor::heights, SetColor::colors));
     return 1;
 }   
 

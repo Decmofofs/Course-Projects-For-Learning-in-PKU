@@ -21,6 +21,7 @@ public:
     PictureWidget* widget;
     QVideoWidget* videoWidget;
     QMediaPlayer* player;
+    QWidget* stwidget;
 
 private slots:
     void on_ValueNoiseStarter_clicked();
@@ -32,6 +33,8 @@ private slots:
     void on_MidPointStarter_clicked();
 
     void on_ErosionStarter_clicked();
+
+    void on_Settings_clicked();
 
 public slots:
     //void onValueNoiseButtonClicked();

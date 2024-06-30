@@ -3,8 +3,8 @@
 #include <QApplication>
 #include <QProcess>
 #include "picturewidget.h"
-#include "cstdio"
 #include "QDebug"
+#include "cstdio"
 objWriter::objWriter() {}
 
 unsigned objWriter::SMOOTH = 0;
@@ -91,8 +91,6 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
     int startx = (int)start_position.x;
     int starty = (int)start_position.y;
 
-    qDebug() << "init x y succ";
-
     unsigned flatten = 2;
 
     // vertices
@@ -106,8 +104,6 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
     }
     fout << std::endl;
 
-    qDebug() << "write v success";
-
     // top faces
     for (int i = 0; i < height - 1; ++i) {
         for (int j = 0; j < width - 1; ++j) {
@@ -120,8 +116,6 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
         }
     }
     fout << std::endl;
-
-    qDebug() << "write top success";
 
     // side faces
     for (int i = 0; i < height - 1; ++i) {
@@ -138,8 +132,6 @@ void objWriter::CubeMesh(heightGraph& graph, const Vector2& start_position, cons
             }
         }
     }
-
-    qDebug() << "write side success";
 
 
     fout.close();

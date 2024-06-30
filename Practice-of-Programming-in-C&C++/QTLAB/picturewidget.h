@@ -18,6 +18,8 @@ public:
     static QApplication* filerootApplication;
     static QQmlApplicationEngine* engine;
     static SetColor* setcolorWidget;
+    static int MeshStyle;
+    static int PrinterStyle;
 
     explicit PictureWidget(QWidget *parent = nullptr);
     virtual ~PictureWidget();
